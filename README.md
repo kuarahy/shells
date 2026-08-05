@@ -10,7 +10,7 @@
 </p>
 
 <p align="center">
-  <a href="https://www.npmjs.com/package/@kuarahy/shells"><img src="https://img.shields.io/npm/v/@kuarahy/shells" alt="npm" /></a>
+  <a href="https://www.npmjs.com/package/@kuarahy/shells"><img src="https://img.shields.io/badge/npm-0.1.0-red" alt="npm" /></a>
   <img src="https://img.shields.io/badge/react-%3E%3D18-blue" alt="React 18+" />
   <img src="https://img.shields.io/badge/typescript-5-blue" alt="TypeScript 5" />
   <img src="https://img.shields.io/badge/license-MIT-green" alt="MIT" />
