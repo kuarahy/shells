@@ -104,4 +104,4 @@ A new page is a new config file. The shell handles the rest.
 
 ---
 
-*A shell is just a structure. You fill it in.*
+*Cowabunga, dude!*
