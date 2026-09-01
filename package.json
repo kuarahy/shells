@@ -13,23 +13,29 @@
       "require": "./dist/index.cjs"
     }
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
   },
   "peerDependencies": {
     "react": ">=18.0.0",
     "react-dom": ">=18.0.0"
   },
   "devDependencies": {
+    "@testing-library/react": "^16.3.3",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
+    "jsdom": "^29.1.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "tsup": "^8.0.0",
-    "typescript": "^5.0.0"
+    "typescript": "^5.0.0",
+    "vitest": "^4.1.11"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org",
@@ -40,5 +46,11 @@
     "type": "git",
     "url": "git+https://github.com/kuarahy/shells.git"
   },
-  "keywords": ["react", "typescript", "config-driven", "page-shells", "component-library"]
+  "keywords": [
+    "react",
+    "typescript",
+    "config-driven",
+    "page-shells",
+    "component-library"
+  ]
 }

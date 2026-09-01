@@ -47,6 +47,8 @@ export interface ShellButtonProps {
   onClick: () => void;
   variant?: ActionVariant;
   disabled?: boolean;
+  /** Defaults to "button". Shells pass "submit" only when the button is the form's native submit control. */
+  type?: "button" | "submit";
 }
 
 export interface ShellDropdownProps {
@@ -54,12 +56,41 @@ export interface ShellDropdownProps {
   options: Array<{ label: string; value: unknown }>;
   onChange: (value: unknown) => void;
   placeholder?: string;
+  /** DOM id — shells pass `field.id` so labels can associate via `htmlFor`. */
+  id?: string;
 }
 
 export interface ShellInputProps {
   value: string;
   onChange: (value: string) => void;
   placeholder?: string;
+  type?: string;
+  /** DOM id — shells pass `field.id` so labels can associate via `htmlFor`. */
+  id?: string;
+}
+
+export interface ShellTextareaProps {
+  value: string;
+  onChange: (value: string) => void;
+  placeholder?: string;
+  rows?: number;
+  /** DOM id — shells pass `field.id` so labels can associate via `htmlFor`. */
+  id?: string;
+}
+
+export interface ShellCheckboxProps {
+  checked: boolean;
+  onChange: (checked: boolean) => void;
+  label?: string;
+}
+
+/** Value is an ISO date string (`yyyy-MM-dd`) or empty. */
+export interface ShellDatePickerProps {
+  value: string;
+  onChange: (value: string) => void;
+  placeholder?: string;
+  /** DOM id — shells pass `field.id` so labels can associate via `htmlFor`. */
+  id?: string;
 }
 
 export interface ComponentMap {
@@ -67,6 +98,9 @@ export interface ComponentMap {
   Button?: React.ComponentType<ShellButtonProps>;
   Dropdown?: React.ComponentType<ShellDropdownProps>;
   Input?: React.ComponentType<ShellInputProps>;
+  Textarea?: React.ComponentType<ShellTextareaProps>;
+  Checkbox?: React.ComponentType<ShellCheckboxProps>;
+  DatePicker?: React.ComponentType<ShellDatePickerProps>;
 }
 
 /** A fetch-compatible function. Inject at <ShellsProvider> to add auth headers, base URLs, etc. */
@@ -133,6 +167,12 @@ export interface FormPageConfig {
   fields: FieldDef[];
   submitLabel?: string;
   cancelLabel?: string;
+  /** Called with the parsed response body after a successful submit. */
+  onSuccess?: (response: unknown) => void;
+  /** Called when the user cancels. If omitted, no cancel button is rendered. */
+  onCancel?: () => void;
+  /** Called when the submit request fails. Defaults to logging to the console. */
+  onError?: (error: unknown) => void;
 }
 
 export interface DetailField {
