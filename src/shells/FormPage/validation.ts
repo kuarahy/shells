@@ -21,6 +21,11 @@ function validateNumber(field: FieldDef, value: unknown): string | null {
  * Returns an error message, or `null` when the value is valid.
  */
 export function validateField(field: FieldDef, value: unknown): string | null {
+  if (field.type === "checkbox") {
+    return field.required && value !== true
+      ? `${field.label} is required`
+      : null;
+  }
   if (isEmpty(value)) {
     return field.required ? `${field.label} is required` : null;
   }
