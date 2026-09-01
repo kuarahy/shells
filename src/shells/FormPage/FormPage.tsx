@@ -14,6 +14,7 @@ export function FormPage({
   cancelLabel = "Cancel",
   onSuccess,
   onCancel,
+  onError,
 }: FormPageConfig): React.ReactElement {
   const {
     components: { Button },
@@ -25,16 +26,23 @@ export function FormPage({
     if (!form.validate()) return;
     form.setSubmitting(true);
     try {
+      // Submit only visible fields — hidden (visibleIf) fields keep no payload.
+      const payload = Object.fromEntries(
+        form.visibleFields.map((f) => [f.id, form.values[f.id]])
+      );
       const response = await fetcher(endpoint, {
         method,
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form.values),
+        body: JSON.stringify(payload),
       });
       onSuccess?.(response);
+    } catch (error) {
+      if (onError) onError(error);
+      else console.error(error);
     } finally {
       form.setSubmitting(false);
     }
-  }, [endpoint, method, fetcher, form, onSuccess]);
+  }, [endpoint, method, fetcher, form, onSuccess, onError]);
 
   if (!Button) {
     throw new Error(
@@ -47,12 +55,9 @@ export function FormPage({
       <h1>{title}</h1>
       {description && <p data-shell="description">{description}</p>}
 
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          void handleSubmit();
-        }}
-      >
+      {/* Plain div — the Button's onClick is the single submit trigger,
+          avoiding a double-submit with a native form onSubmit. */}
+      <div data-shell="form">
         {form.visibleFields.map((field) => (
           <FormField
             key={field.id}
@@ -79,7 +84,7 @@ export function FormPage({
             />
           )}
         </div>
-      </form>
+      </div>
     </div>
   );
 }
