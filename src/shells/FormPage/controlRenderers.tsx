@@ -20,6 +20,7 @@ const renderTextarea: ControlRenderer = ({ field, value, onChange }, { Textarea 
     onChange,
     placeholder: field.placeholder,
     rows: field.rows,
+    id: field.id,
   };
   return <Textarea {...props} />;
 };
@@ -33,6 +34,7 @@ const renderDropdown: ControlRenderer = ({ field, value, onChange }, { Dropdown 
       options={options}
       onChange={onChange}
       placeholder={field.placeholder}
+      id={field.id}
     />
   );
 };
@@ -50,6 +52,7 @@ const renderDate: ControlRenderer = ({ field, value, onChange }, { DatePicker })
     value: String(value ?? ""),
     onChange,
     placeholder: field.placeholder,
+    id: field.id,
   };
   return <DatePicker {...props} />;
 };
@@ -61,6 +64,7 @@ const renderInput: ControlRenderer = ({ field, value, onChange }, { Input }) => 
     onChange,
     placeholder: field.placeholder,
     type: field.type,
+    id: field.id,
   };
   return <Input {...props} />;
 };

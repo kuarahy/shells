@@ -56,6 +56,8 @@ export interface ShellDropdownProps {
   options: Array<{ label: string; value: unknown }>;
   onChange: (value: unknown) => void;
   placeholder?: string;
+  /** DOM id — shells pass `field.id` so labels can associate via `htmlFor`. */
+  id?: string;
 }
 
 export interface ShellInputProps {
@@ -63,6 +65,8 @@ export interface ShellInputProps {
   onChange: (value: string) => void;
   placeholder?: string;
   type?: string;
+  /** DOM id — shells pass `field.id` so labels can associate via `htmlFor`. */
+  id?: string;
 }
 
 export interface ShellTextareaProps {
@@ -70,6 +74,8 @@ export interface ShellTextareaProps {
   onChange: (value: string) => void;
   placeholder?: string;
   rows?: number;
+  /** DOM id — shells pass `field.id` so labels can associate via `htmlFor`. */
+  id?: string;
 }
 
 export interface ShellCheckboxProps {
@@ -83,6 +89,8 @@ export interface ShellDatePickerProps {
   value: string;
   onChange: (value: string) => void;
   placeholder?: string;
+  /** DOM id — shells pass `field.id` so labels can associate via `htmlFor`. */
+  id?: string;
 }
 
 export interface ComponentMap {
