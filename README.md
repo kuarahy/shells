@@ -86,6 +86,47 @@ Every shell will use those components automatically.
 
 ---
 
+## FormPage
+
+`FormPage` turns a `FormPageConfig` into a validated, conditionally-rendered form. It renders each field through the primitives wired into `ShellsProvider` — `Input`, `Textarea`, `Dropdown`, `Checkbox`, `DatePicker` — so it picks up your component library automatically.
+
+```tsx
+import { FormPage, type FormPageConfig } from "@kuarahy/shells";
+
+const config: FormPageConfig = {
+  title: "New Design Review",
+  endpoint: "/api/design-reviews",
+  method: "POST",
+  fields: [
+    { id: "title",    type: "text",     label: "Title",    required: true },
+    { id: "team",     type: "dropdown", label: "Team",      options: ["Design", "Engineering", "QA"] },
+    { id: "priority", type: "number",   label: "Priority",  min: 1, max: 5 },
+    { id: "due",      type: "date",     label: "Due date" },
+    { id: "other",    type: "checkbox", label: "Other team involved" },
+    {
+      id: "otherDetail",
+      type: "textarea",
+      label: "Which team?",
+      visibleIf: { field: "other", operator: "==", value: true },
+    },
+  ],
+  onSuccess: () => navigate("/reviews"),
+  onError:   (err) => toast.error(String(err)),
+  onCancel:  () => navigate(-1),
+};
+
+export default () => <FormPage {...config} />;
+```
+
+**Behavior:**
+
+- **Visibility** — `visibleIf` evaluates against live form values; hidden fields are excluded from the submit payload.
+- **Validation** — runs on submit: `required` (checkboxes must be checked), `min`/`max` on numbers, email format. Errors render under each field and clear as the user types.
+- **Submit** — sends visible fields as JSON to `endpoint` with `method` (default `POST`) via the provider `fetcher`, then calls `onSuccess(response)` or `onError(error)`.
+- **Accessibility** — labels associate with controls via `field.id` (WCAG); required fields are marked `*`.
+
+---
+
 ## Install
 
 ```bash
@@ -103,5 +144,7 @@ npm install @kuarahy/shells
 A new page is a new config file. The shell handles the rest.
 
 ---
+
+See [CHANGELOG.md](CHANGELOG.md) for release history.
 
 *Cowabunga, dude!*
