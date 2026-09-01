@@ -21,6 +21,9 @@ export type {
   ShellButtonProps,
   ShellDropdownProps,
   ShellInputProps,
+  ShellTextareaProps,
+  ShellCheckboxProps,
+  ShellDatePickerProps,
   // Utilities
   Fetcher,
   ActionVariant,
