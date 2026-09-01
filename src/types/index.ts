@@ -60,6 +60,27 @@ export interface ShellInputProps {
   value: string;
   onChange: (value: string) => void;
   placeholder?: string;
+  type?: string;
+}
+
+export interface ShellTextareaProps {
+  value: string;
+  onChange: (value: string) => void;
+  placeholder?: string;
+  rows?: number;
+}
+
+export interface ShellCheckboxProps {
+  checked: boolean;
+  onChange: (checked: boolean) => void;
+  label?: string;
+}
+
+/** Value is an ISO date string (`yyyy-MM-dd`) or empty. */
+export interface ShellDatePickerProps {
+  value: string;
+  onChange: (value: string) => void;
+  placeholder?: string;
 }
 
 export interface ComponentMap {
@@ -67,6 +88,9 @@ export interface ComponentMap {
   Button?: React.ComponentType<ShellButtonProps>;
   Dropdown?: React.ComponentType<ShellDropdownProps>;
   Input?: React.ComponentType<ShellInputProps>;
+  Textarea?: React.ComponentType<ShellTextareaProps>;
+  Checkbox?: React.ComponentType<ShellCheckboxProps>;
+  DatePicker?: React.ComponentType<ShellDatePickerProps>;
 }
 
 /** A fetch-compatible function. Inject at <ShellsProvider> to add auth headers, base URLs, etc. */
@@ -133,6 +157,10 @@ export interface FormPageConfig {
   fields: FieldDef[];
   submitLabel?: string;
   cancelLabel?: string;
+  /** Called with the parsed response body after a successful submit. */
+  onSuccess?: (response: unknown) => void;
+  /** Called when the user cancels. If omitted, no cancel button is rendered. */
+  onCancel?: () => void;
 }
 
 export interface DetailField {
