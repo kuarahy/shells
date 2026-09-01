@@ -45,5 +45,10 @@ export function evaluateCondition(
       return compareStrings(actual, expected, (a, b) => a.startsWith(b));
     case "endsWith":
       return compareStrings(actual, expected, (a, b) => a.endsWith(b));
+    default:
+      // Config can come from outside the type system (JSON/CMS) — fail loudly.
+      throw new Error(
+        `evaluateCondition: unsupported operator "${String(condition.operator)}"`
+      );
   }
 }
