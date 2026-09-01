@@ -47,6 +47,8 @@ export interface ShellButtonProps {
   onClick: () => void;
   variant?: ActionVariant;
   disabled?: boolean;
+  /** Defaults to "button". Shells pass "submit" only when the button is the form's native submit control. */
+  type?: "button" | "submit";
 }
 
 export interface ShellDropdownProps {
@@ -161,6 +163,8 @@ export interface FormPageConfig {
   onSuccess?: (response: unknown) => void;
   /** Called when the user cancels. If omitted, no cancel button is rendered. */
   onCancel?: () => void;
+  /** Called when the submit request fails. Defaults to logging to the console. */
+  onError?: (error: unknown) => void;
 }
 
 export interface DetailField {
