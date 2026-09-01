@@ -73,6 +73,7 @@ export function FormPage({
             label={submitLabel}
             onClick={handleSubmit}
             variant="primary"
+            type="button"
             disabled={form.submitting}
           />
           {onCancel && (
@@ -80,6 +81,7 @@ export function FormPage({
               label={cancelLabel}
               onClick={onCancel}
               variant="secondary"
+              type="button"
               disabled={form.submitting}
             />
           )}
